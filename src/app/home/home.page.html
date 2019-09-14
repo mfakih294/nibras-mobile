@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Nibras Mobile
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card class="welcome-card">
+      <!--img src="/assets/shapes.svg" alt="" /-->
+      <ion-card-header>        
+        <ion-card-subtitle></ion-card-subtitle>
+	
+		<ion-card-title>Homepage</ion-card-title>
+    </ion-card-header>
+      <ion-card-content>
+
+          <b>Nibras IP and port</b>: 
+          <a (click) = "change()">
+            {{ipA}} (edit)
+          </a>
+          
+          <br/>
+         <b></b>{{tosync?.split(',')?.length - 1}} records to 
+          <a  style="font-size: small; padding: 1px" (click) = "syncDone()">commit.</a>
+         
+          {{nklog?.split('::')?.length - 1}} writings to 
+          <a  style="font-size: small; padding: 1px" (click) = "syncWritings()">commit.</a>
+<br/>
+<br/>
+          <a   (click) = "syncData()">Sync</a> &nbsp;
+          <a  (click) = "refresh()">Get status</a>&nbsp;
+           
+           <a (click) = "clearSync()">Clear</a>
+           <br/>
+<hr/>
+  <div id='logArea' style="font-style: italic; font-size: small; color: darkgray"></div>
+  
+       
+        
+          <form (ngSubmit)="savek()">
+            
+            <ion-input name="nkinput"  autofocus="true" color="light" rows="3"
+             style="display: inline-block; direction: rtl; text-align: right;
+              border: 1px lightgrey; background: lightblue"             
+            placeholder="Enter note..."  type="text" id="nkinput" [(ngModel)]="nk"></ion-input>  
+            <!-- <a  style="display: inline; font-size: small; padding: 0px; margin: 0px;" (click) = "savek();" onclick="document.getElementById('nkinput').focus()">+++++++++++++++++++++++++++++++</a> -->
+          </form>
+          <br/>
+          <div name="nklog" id="nklog" style='overflow: auto; direction: rtl; text-align: right; ' 
+          [innerHTML]="nklog"></div> 
+          <br/>
+      </ion-card-content>
+    </ion-card>
+    
+</ion-content>

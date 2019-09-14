@@ -1,0 +1,7 @@
+{
+  "name": "Nibras Mobile",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

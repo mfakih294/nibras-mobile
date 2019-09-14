@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Nibras Mobile /P ({{ipA}})
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding"  >
+      <!-- style="direction: rtl; text-align: right;" -->
+       
+       <!-- <input type="ipA" name="ipA" value="{{ipA}}" [(ngModel)]="ipA"> -->
+       <!-- <ion-button  style="font-size: small; padding: 1px" (click) = "updat()">Set IP</ion-button> -->
+      <!-- <p name="message" [innerHTML]="message" [(ngModel)]="message"></p> -->
+  <!-- <div [innerHTML]="mytext"></div> -->
+<div style="font-size: small; background: mintcream; font-style: italic;">
+  {{message}}
+</div>
+  <br/>
+  
+  <br/>
+
+  <div id="123"></div>
+  
+ <table *ngFor="let item of mytext" border="1" style="padding: 3px; border: 1px solid lightgrey; width: 99%">
+        <tr style="padding: 3px;" (click)="openNext(item)">
+         
+          <td style="width: 4% !important; padding: 4px;text-align: center; color: white; font-weight: bold;" 
+          class="{{item.type}}">
+            <b>{{item.type}} {{item.id}}</b>
+          </td>
+
+          <td style=" width: 24% !important; padding: 4px; background:lightyellow; text-align: left;">
+              <i>{{item.meta}}</i>
+            </td>
+           
+          <td  style="width: 69%; padding: 0.6em; margin: 4px !important; color: midnightblue;  direction: rtl; text-align: right;">
+            {{item.title}} {{item.body != '' ? '...': ''}}
+          </td>
+          
+            
+            
+  </tr>
+  <tr>
+    <td id="{{item.type + '' + item.id}}" colspan="3" 
+    style="padding: 0.7em; padding-right: 2em; direction: rtl; text-align: right;">
+        
+        
+    </td>
+  </tr>
+  </table>
+  
+  </div>
+  <!--
+    <div *ngIf="selectedItem" padding>
+      You navigated here from <b>{{selectedItem.title }}</b>
+    </div>
+  -->
+</ion-content>
