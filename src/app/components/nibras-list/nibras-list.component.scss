@@ -1,3 +1,17 @@
+body{
+    color: black;
+}
+.hidden{
+    display: none;
+}
+
+
+.metaRow td , .metaRow span , .metaRow td a {
+    color: darkgray;
+}
+
+
+
 .ar{
 text-align: justify !important;
 direction: rtl !important;
@@ -8,7 +22,17 @@ text-align: justify !important;
 direction: ltr !important;
 }
 
+.done{
+    text-decoration: line-through;
+}
 
+.justDone{
+    background: darkgray;
+}
+
+.justRead{
+    background: lightgray;
+}
 
 table td {
     font-size: normal
@@ -53,7 +77,7 @@ table td {
     }
     
     .T{
-        background: lightgreen;
+        background: lightseagreen;
     }
     
     

@@ -12,11 +12,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { File } from '@ionic-native/file/ngx';
 
+ import { FileOpener } from "@ionic-native/file-opener/ngx";
+
+// import { PreviewAnyFile } from '@ionic-native/preview-any-file';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { Clipboard } from '@ionic-native/clipboard/ngx';
+
 // import { HttpModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { ComponentsModule } from './components/components.module';
-import { NibrasListComponent } from './components/nibras-list/nibras-list.component';
-
+//import { NibrasListComponent } from './components/nibras-list/nibras-list.component';
+import { Autostart } from '@ionic-native/autostart/ngx';
 //import { NtableComponent } from './ntable/ntable.component';
 
 
@@ -35,9 +42,15 @@ import { NibrasListComponent } from './components/nibras-list/nibras-list.compon
   providers: [
     StatusBar,
     SplashScreen,
-    File,
+    LocalNotifications,
+    Autostart,
+     File,
+     FileOpener,
+     InAppBrowser,
+     Clipboard,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
+//

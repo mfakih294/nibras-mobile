@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { ArtPage } from './art.page';
 import { ComponentsModule } from '../components/components.module';
 import { NibrasListComponent } from '../components/nibras-list/nibras-list.component';
+import { Storage } from '@ionic/storage';
 
 const routes: Routes = [
   {

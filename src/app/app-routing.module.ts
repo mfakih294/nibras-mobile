@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'todo', loadChildren: './todo/todo.module#TodoPageModule' },
   { path: 'k', loadChildren: './k/k.module#KPageModule' },
   { path: 'cal', loadChildren: './cal/cal.module#CalPageModule' },
-  { path: 'key', loadChildren: './key/key.module#KeyPageModule' }
+  { path: 'e', loadChildren: './e/e.module#EPageModule' }
 ];
 
 @NgModule({

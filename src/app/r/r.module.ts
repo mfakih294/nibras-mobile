@@ -8,6 +8,8 @@ import { IonicModule } from '@ionic/angular';
 import { RPage } from './r.page';
 import { ComponentsModule } from '../components/components.module';
 import { NibrasListComponent } from '../components/nibras-list/nibras-list.component';
+import { Storage } from '@ionic/storage';
+
 
 const routes: Routes = [
   {
@@ -27,4 +29,8 @@ const routes: Routes = [
   ],
   declarations: [RPage]
 })
-export class RPageModule {}
+export class RPageModule {
+
+}
+
+

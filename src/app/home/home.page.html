@@ -19,11 +19,17 @@
     </ion-card-header>
       <ion-card-content>
 
-          <b>Nibras IP and port</b>: 
+          <b>Nibras Desktop IP and port</b>: 
           <a (click) = "change()">
             {{ipA}} (edit)
           </a>
-          
+         <br/>
+          <!-- <b>Nibras Files IP and port</b>: 
+          <a (click) = "changeF()">
+            {{ipF}} (edit)
+          </a>
+        -->
+      
           <br/>
          <b></b>{{tosync?.split(',')?.length - 1}} records to 
           <a  style="font-size: small; padding: 1px" (click) = "syncDone()">commit.</a>
@@ -40,6 +46,7 @@
 <hr/>
   <div id='logArea' style="font-style: italic; font-size: small; color: darkgray"></div>
   
+
        
         
           <form (ngSubmit)="savek()">
@@ -51,6 +58,8 @@
             <!-- <a  style="display: inline; font-size: small; padding: 0px; margin: 0px;" (click) = "savek();" onclick="document.getElementById('nkinput').focus()">+++++++++++++++++++++++++++++++</a> -->
           </form>
           <br/>
+
+          
           <div name="nklog" id="nklog" style='overflow: auto; direction: rtl; text-align: right; ' 
           [innerHTML]="nklog"></div> 
           <br/>

@@ -5,14 +5,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { KeyPage } from './key.page';
+import { EPage } from './e.page';
 import { ComponentsModule } from '../components/components.module';
 import { NibrasListComponent } from '../components/nibras-list/nibras-list.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: KeyPage
+    component: EPage
   }
 ];
 
@@ -25,6 +25,6 @@ const routes: Routes = [
     
     RouterModule.forChild(routes)
   ],
-  declarations: [KeyPage]
+  declarations: [EPage]
 })
-export class KeyPageModule {}
+export class EPageModule {}

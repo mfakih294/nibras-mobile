@@ -4,6 +4,8 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
+import { Autostart } from '@ionic-native/autostart/ngx';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -18,29 +20,29 @@ export class AppComponent {
       icon: 'home'
     },
 
-    {
-      title: 'Todo',
-      type: 'Todo',
-      url: '/todo',
-      icon: 'checkmark'
-    },
+    // {
+    //   title: 'Todo',
+    //   type: 'Todo',
+    //   url: '/todo',
+    //   icon: 'checkmark'
+    // },
     {
       title: 'Tasks',
       type: 'T',
       url: '/t',
       icon: 'checkmark'
     },
-    {
-      title: 'Calendar',
-      type: 'Cal',
-      url: '/cal',
-      icon: 'checkmark'
-    },
+    // {
+    //   title: 'Calendar',
+    //   type: 'Cal',
+    //   url: '/cal',
+    //   icon: 'checkmark'
+    // },
 	  {
       title: 'Plans',
       type: 'P',
       url: '/p',
-      icon: 'alarm'
+      icon: 'checkmark'
     },
   
 	  {
@@ -49,25 +51,19 @@ export class AppComponent {
       url: '/g',
       icon: 'analytics'
     },
-{
-      title: 'N piles',
-      type: 'K',
-      url: '/k',
-      icon: 'attach'
-    },
+// {
+//       title: 'N piles',
+//       type: 'K',
+//       url: '/k',
+//       icon: 'attach'
+//     },
 
-    {
-      title: 'Key notes',
-      type: 'Key',
-      url: '/key',
-      icon: 'attach'
-    },
 
     {
       title: 'Notes',
       type: 'N',
       url: '/n',
-      icon: 'attach'
+      icon: 'create'
     },
 
 
@@ -76,9 +72,16 @@ export class AppComponent {
       type: 'W',
       url: '/w',
       icon: 'create'
-    },	 
+    },
+        {
+      title: 'Excerpts',
+      type: 'E',
+      url: '/e',
+      icon: 'bookmarks'
+    },
+	 
 	{
-      title: 'Active study',
+      title: 'Resources',
       type: 'R',
       url: '/r',
       icon: 'bookmarks'
@@ -102,9 +105,12 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private autostart: Autostart
   ) {
     this.initializeApp();
+    
+
     
   }
 
@@ -112,6 +118,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.show();
       this.splashScreen.hide();
+      this.autostart.enable();
     });
   }
 }
