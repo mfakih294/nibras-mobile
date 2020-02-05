@@ -1,102 +1,101 @@
-body{
+body {
     color: black;
 }
-.hidden{
+
+.hidden {
     display: none;
 }
 
-
-.metaRow td , .metaRow span , .metaRow td a {
+.metaRow td,
+.metaRow span,
+.metaRow td a {
     color: darkgray;
 }
 
-
-
-.ar{
-text-align: justify !important;
-direction: rtl !important;
+.ar {
+    text-align: justify !important;
+    direction: rtl !important;
 }
 
-.en{
-text-align: justify !important;
-direction: ltr !important;
+.en {
+    text-align: justify !important;
+    direction: ltr !important;
 }
 
-.done{
+.done {
     text-decoration: line-through;
 }
 
-.justDone{
+.justDone {
     background: darkgray;
 }
 
-.justRead{
+.justRead {
     background: lightgray;
 }
 
 table td {
-    font-size: normal
+    font-size: normal;
+    line-height: 30px;
 }
- 
 
+.ar {
+    padding: 6px;
+    margin: 0px;
+    // background: rgb(253, 246, 227) !important;
+    color: rgb(43, 52, 55) !important;
+    ;
+    font-size: 0.94em;
+}
 
-.Todo{
+.Todo {
     background: darkblue;
 }
 
-
-
-.K{
+.K {
     background: darkblue;
 }
 
-
-
-.Kee{
+.Kee {
     background: darkblue;
 }
-
-
-
 
 .Cal {
     background: darkblue;
 }
 
+.P {
+    background: darkblue;
+}
 
-    .P{
-        background: darkblue;
-    }
-    
-    .G{
-        background: darkblue;
-    }
-    
-    .G{
-        background: darkgreen;
-    }
-    
-    .T{
-        background: lightseagreen;
-    }
-    
-    
-    .N{
-        background: darkorange;
-    }
-    
-    .W{
-        background: LightSalmon;
-    }
-    
-    .R{
-        background: DarkSlateBlue;
-    }
+.G {
+    background: darkblue;
+}
 
-    .Nws{
-        background: DarkSlateBlue;
-    }
+.G {
+    background: darkgreen;
+}
 
-    .Art{
-        background: DarkSlateBlue;
-    }
+.T {
+    background: lightseagreen;
+}
+
+.N {
+    background: darkorange;
+}
+
+.W {
+    background: LightSalmon;
+}
+
+.R {
+    background: DarkSlateBlue;
+}
+
+.Nws {
+    background: DarkSlateBlue;
+}
+
+.Art {
+    background: DarkSlateBlue;
+}

@@ -25,6 +25,7 @@ import { ComponentsModule } from './components/components.module';
 //import { NibrasListComponent } from './components/nibras-list/nibras-list.component';
 import { Autostart } from '@ionic-native/autostart/ngx';
 //import { NtableComponent } from './ntable/ntable.component';
+//import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { Autostart } from '@ionic-native/autostart/ngx';
      File,
      FileOpener,
      InAppBrowser,
+    // AndroidPermissions,
      Clipboard,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

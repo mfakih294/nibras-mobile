@@ -15,45 +15,69 @@
       <ion-card-header>        
         <ion-card-subtitle></ion-card-subtitle>
 	
-		<ion-card-title>Homepage</ion-card-title>
+		<ion-card-title>Configuration</ion-card-title>
     </ion-card-header>
       <ion-card-content>
-
-          <b>Nibras Desktop IP and port</b>: 
-          <a (click) = "change()">
+	  
+	  <div style="border-bottom: 1px solid darkgray">
+          <b>Nibras PKM address:</b>
+		  <a (click) = "change()">
             {{ipA}} (edit)
           </a>
+ <br/><i style="font-size: small">Format: <code>IP(:port)/app-name</code>. Example: 192.168.1.23/nibras.
+Get Nibras Desktop IP from the right of its footer area. 
+              Enter the port if it has been changed from the default (433). 
+             App-name is "nibras" by default.</i>
+            <br/>
+          
+          
+          
          <br/>
+         <hr/>
+		 </div>
+         <br/>
+
           <!-- <b>Nibras Files IP and port</b>: 
           <a (click) = "changeF()">
             {{ipF}} (edit)
           </a>
         -->
       
+	  <!-- <a href="files/eg.jpg" target="_blank">eg.jpg</a> -->
+          
+         <!-- <b></b>{{tosync?.split(',')?.length - 1}} records to  -->
+          <!-- <a  style="font-size: small; padding: 1px" (click) = "syncDone()">commit.</a> -->
+     <!--     <div style="border-bottom: 1px solid darkgray">
+          
           <br/>
-         <b></b>{{tosync?.split(',')?.length - 1}} records to 
-          <a  style="font-size: small; padding: 1px" (click) = "syncDone()">commit.</a>
-         
-          {{nklog?.split('::')?.length - 1}} writings to 
-          <a  style="font-size: small; padding: 1px" (click) = "syncWritings()">commit.</a>
-<br/>
-<br/>
-          <a   (click) = "syncData()">Sync</a> &nbsp;
-          <a  (click) = "refresh()">Get status</a>&nbsp;
-           
-           <a (click) = "clearSync()">Clear</a>
-           <br/>
-<hr/>
-  <div id='logArea' style="font-style: italic; font-size: small; color: darkgray"></div>
-  
+          
+		  </div>
+          <br/>
+          <hr/>
+          <br/>  -->
+		  <div style="border-bottom: 1px solid darkgray">
+          <a   (click) = "syncData()" >Get bookmarked records</a> &nbsp;
+          <a  (click) = "refresh()">Check status</a>&nbsp;
+		  <br/>
+		  <div id='logArea' style="font-style: italic; font-size: small; color: darkgray"></div>
+          </div> 
 
-       
+  
+<br/>
+       <div style="border-bottom: 1px solid darkgray">
         
-          <form (ngSubmit)="savek()">
+  <h4><b>Notes</b> ({{nklog?.split('::')?.length - 1 == -1 ? '0' :  nklog?.split('::')?.length - 1}} lines)</h4>
+  <a id='saveAsNoteLink'  style="font-size: small; padding: 1px" (click) = "syncWritings()">Copy to Nibras PKM</a>
+          &nbsp;&nbsp;
+          <a (click) = "clearSync()" 
+          style="font-size: small; "
+          before="if(!confirm('Are you sure you want to clear the entered notes?')) return false">Clear notes</a>
+		  
+            <form (ngSubmit)="savek()">
             
             <ion-input name="nkinput"  autofocus="true" color="light" rows="3"
              style="display: inline-block; direction: rtl; text-align: right;
-              border: 1px lightgrey; background: lightblue"             
+              border: 1px darkgrey; background: lightgrey" 
             placeholder="Enter note..."  type="text" id="nkinput" [(ngModel)]="nk"></ion-input>  
             <!-- <a  style="display: inline; font-size: small; padding: 0px; margin: 0px;" (click) = "savek();" onclick="document.getElementById('nkinput').focus()">+++++++++++++++++++++++++++++++</a> -->
           </form>
@@ -63,6 +87,7 @@
           <div name="nklog" id="nklog" style='overflow: auto; direction: rtl; text-align: right; ' 
           [innerHTML]="nklog"></div> 
           <br/>
+		  </div>
       </ion-card-content>
     </ion-card>
     

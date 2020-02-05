@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { AlertController } from '@ionic/angular';
  import { map } from 'rxjs/operators';
  import { Storage } from '@ionic/storage';
  import { HttpClient, HttpParams,  HttpHeaders} from '@angular/common/http';
@@ -9,6 +9,7 @@ import { Component } from '@angular/core';
  // import { FileOpener } from '@ionic-native/file-opener/ngx';
 // import { PreviewAnyFile } from '@ionic-native/preview-any-file';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+//import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 })
 export class HomePage {
 
-  ipA;
+  ipA = 'localhost/nibras';
   ipF;
 
   nk;
@@ -31,7 +32,9 @@ export class HomePage {
 
   constructor(private http: HttpClient,  private file: File,
     private iab: InAppBrowser,
+    public alertController: AlertController,
     // private fileOpener: FileOpener,
+//private androidPermissions: AndroidPermissions,
     private storage: Storage, private localNotifications: LocalNotifications ){
 
     // Schedule a single notification
@@ -50,8 +53,11 @@ export class HomePage {
     });
 
     this.storage.get('ipA').then((val) => {
+      if (!val)
+      val = 'localhost/nibras'
+    //  else
     this.ipA = val;
-    var link = "https://" + this.ipA + "/nibras/page/heartbeatJson"
+    var link = "https://" + this.ipA + "/page/heartbeatJson"
 
     this.http.get(link,{}).subscribe(response => {                
       if (response['result'] == 'ok')
@@ -71,7 +77,11 @@ export class HomePage {
     });
 
     this.storage.get('tosync').then((val) => {
-      this.tosync = val  
+      if (val){
+        this.tosync = val  
+      } else {
+        this.storage.set('tosync', '')
+      }
       });
 
       this.syncData()
@@ -79,9 +89,15 @@ export class HomePage {
 } // end of constructor
 
 refresh(){
+	/*
+  this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE).then(
+    result => console.log('Has permission?',result.hasPermission),
+    err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE)
+  );
+  */
   this.storage.get('ipA').then((val) => {
     this.ipA = val;
-    var link = "https://" + this.ipA + "/nibras/page/heartbeatJson"
+    var link = "https://" + this.ipA + "/page/heartbeatJson"
 
     this.http.get(link,{}).subscribe(response => {                
       if (response['result'] == 'ok')
@@ -89,10 +105,12 @@ refresh(){
       //console.log ('res' + response['result'])
     },
     err => {               
-     document.getElementById('logArea').innerHTML =   'Nibras Desktop offline: '  + err.message;
+     document.getElementById('logArea').innerHTML =   'Nibras Desktop offline'//  + err.message;
     })
   })
 
+  
+  // this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGEs.androidPermissions.PERMISSION.GET_ACCOUNTS]);
   
 
   
@@ -105,13 +123,42 @@ refresh(){
 // });
 }
 
-clearSync(){
-  this.storage.set('tosync', '')
+async clearSync(){
+
+  const alert = await this.alertController.create({
+    header: 'Confirm!',
+    message: 'Are you sure you want to clear completion log and notes?',
+    buttons: [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        cssClass: 'secondary',
+        handler: (blah) => {
+          console.log('Confirm Cancel: blah');
+        }
+      }, {
+        text: 'Ok',
+        handler: () => {
+
+          this.storage.set('tosync', '')
   this.tosync = ''
   this.storage.set('nklog', '')
   this.nklog = ''
   document.getElementById('logArea').innerHTML  = 'All cleared.';
 
+
+          console.log('Confirm Okay');
+        }
+      }
+    ]
+  });
+
+  await alert.present();
+  let result = await alert.onDidDismiss();
+  console.log(result);
+
+
+  
 }
 change() 
 {
@@ -177,14 +224,14 @@ syncDone(){
        }), params
      }; 
      var ipp = this.ipA
-     var link = "https://" + ipp + "/nibras/sync/mobilePush"
+     var link = "https://" + ipp + "/sync/mobilePush"
      this.http.get(link,{params: params}).subscribe(response => {          
      document.getElementById('logArea').innerHTML = response + ' synced.'     
      this.storage.set('tosync', '')
-     this.syncData();
+     //this.syncData();
      },
      err => {    
-      document.getElementById('logArea').innerHTML = 'Not synced: '  + err.message
+      document.getElementById('logArea').innerHTML = 'Not synced'//  + err.message
      })
 
      
@@ -222,7 +269,7 @@ syncWritings()
            "data": val.replace(/<br\/>/g, '\n')
    }
       var ipp = this.ipA
-      var link = "https://" + ipp + "/nibras/sync/mobileWritings"
+      var link = "https://" + ipp + "/sync/mobileWritings"
    
       this.http.post(link, postData, httpOptions).subscribe(response => {          
       document.getElementById('logArea').innerHTML = response['result']
@@ -231,7 +278,7 @@ syncWritings()
     //  this.syncData();
       },
       err => {    
-       document.getElementById('logArea').innerHTML = 'Not synced: ' + err.message
+       document.getElementById('logArea').innerHTML = 'Not synced'// + err.message
       })
     });
    });
@@ -241,17 +288,21 @@ syncWritings()
  }
 syncData() 
  {
+
   
+ //
+ this.syncDone()
+
     this.storage.get('ipA').then(val => {
     this.ipA = val    
-         var link = "https://" + this.ipA + "/nibras/page/heartbeatJson"
+         var link = "https://" + this.ipA + "/page/heartbeatJson"
   
       this.http.get(link,{}).subscribe(response => {                
         if (response['result'] == 'ok')
         document.getElementById('logArea').innerHTML =   'Nibras Desktop online';    
         
         // this.syncType('Todo', 'Todo')
-
+        
         this.syncType('T', 'Tasks')
         // this.syncType('Cal', 'Calendar')
         this.syncType('P', 'Planner')
@@ -272,7 +323,7 @@ syncData()
 
       },
       err => {               
-       document.getElementById('logArea').innerHTML =   'Nibras Desktop offline '  + err.message;
+       document.getElementById('logArea').innerHTML =   'Nibras Desktop offline'//  + err.message;
          
       //  this.syncType('Todo', 'Todo')
 
@@ -304,11 +355,12 @@ syncData()
 
    });
 
+   
 
   } // end of sync
 
   syncType(type, label){
-    this.http.get("https://" + this.ipA + "/nibras/sync/exportJson" + type).subscribe(response => {     
+    this.http.get("https://" + this.ipA + "/sync/exportJson" + type).subscribe(response => {     
   let t = type;
 this.storage.set('mytext' + t, response['data']);
 document.getElementById('menuItem' + t).innerHTML =   label + ' (' +  response['data'].length + ')'
@@ -370,7 +422,7 @@ document.getElementById('menuItem' + t).innerHTML =   label + ' (' +  response['
      
     
      //mytext = ''
-     //fetch('http://localhost:1441/nibras/page/heartbeat', {})
+     //fetch('http://localhost:1441/page/heartbeat', {})
        //.then(res => res.json())
        //.then(posts => console.log('posts ' + posts))
      

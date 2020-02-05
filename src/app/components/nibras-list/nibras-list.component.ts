@@ -43,9 +43,12 @@ clean(text){
 }
 openNext(item) 
 {
-  document.getElementById(item.type + '' + item.id).innerHTML = item.body
+  document.getElementById(item.type + '' + item.id + 'fullText').innerHTML = item.body
   document.getElementById(item.type + '' + item.id + 'preview').innerHTML = ''
-
+  
+  document.getElementById(item.type + '' + item.id + 'actionsRow').classList.remove('hidden');
+  document.getElementById(item.type + '' + item.id + 'preview').classList.remove('hidden');
+  document.getElementById(item.type + '' + item.id + 'closeRow').classList.remove('hidden');
   document.getElementById('nkinput').setAttribute('value', item.ecode + item.id + ': ');
 }
 showFiles(item) 
@@ -55,11 +58,16 @@ showFiles(item)
 }
 close(item) 
 {
-  document.getElementById(item.type + '' + item.id).innerHTML = ''
+  
   document.getElementById(item.type + '' + item.id + 'preview').innerHTML = this.clean(item.body)
   document.getElementById(item.type + '' + item.id + 'title').scrollIntoView();
   document.getElementById(item.type + '' + item.id + 'preview').classList.add('justRead');
-     document.getElementById(item.type + '' + item.id + 'title').classList.add('justRead');
+  document.getElementById(item.type + '' + item.id + 'title').classList.add('justRead');
+  document.getElementById(item.type + '' + item.id + 'closeRow').classList.add('hidden');
+
+  // document.getElementById(item.type + '' + item.id + 'fullText').innerHTML = ''
+  
+  document.getElementById(item.type + '' + item.id + 'fullText').classList.add('hidden');
 }
 
  markDone(item) 
@@ -133,11 +141,11 @@ var path = item.type + '/' + item.rtype + '/' + Math.floor(item.id/100).toString
 
 
 
-openRFile(type, rtype, id, name){
+openRFile(ecode, rtype, id, name){
 
 
-  var path = 'Nibras/' + type + '/' + rtype + '/' + Math.floor(id/100).toString() + '/' + id + '/' + name;
-  //document.getElementById(type + '' + id + 'files').innerHTML = ' path ' + path
+  var path = 'Nibras/' + ecode + '/' + rtype + '/' + Math.floor(id/100).toString() + '/' + id + '/' + name;
+  
 
   let ext = new Map([
     ["pdf","application/pdf"],
@@ -175,12 +183,16 @@ openRFile(type, rtype, id, name){
     ["m4a","audio/mp4"]
   ]);
 
+  
 
    this.fileOpener.showOpenWithDialog(
      //'/storage/emulated/0/Nibras/' + path
-     this.file.externalRootDirectory + path, ext.get(name.split('.')[1]))
-   .then(() => document.getElementById(type+id + 'copy').innerHTML = name + ' opened')
-    .catch(e =>document.getElementById(type+id + 'copy').innerHTML ='Error opening file ' + e.message + ' ' +
+     this.file.externalRootDirectory + path, 
+     ext.get(name.split('.')[1])
+     
+     )
+   .then(() => document.getElementById(ecode+id + 'copy').innerHTML = this.file.externalRootDirectory + path + ' opened...')
+    .catch(e =>document.getElementById(ecode+id + 'copy').innerHTML ='Error opening file ' + e.message + ' ' +
      this.file.externalRootDirectory + path + ' mine ' + ext.get(name.split('.')[1])) ;
    
   //this.storage.get('ipF').then((val) => { 
