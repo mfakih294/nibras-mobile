@@ -19,7 +19,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 export class HomePage {
 
   ipA = 'localhost/nibras';
-  ipF;
+  //ipF;
 
   nk;
   nklog = '';
@@ -48,15 +48,34 @@ export class HomePage {
       this.nklog = val
     });
 
-    this.storage.get('ipF').then((val) => {
-      this.ipF = val;
-    });
+    // this.storage.get('ipF').then((val) => {
+    //   this.ipF = val;
+    // });
 
     this.storage.get('ipA').then((val) => {
-      if (!val)
-      val = 'localhost/nibras'
-    //  else
-    this.ipA = val;
+      // console.log('ipa 0: ' + val)
+       if (!val || val == 'null' || val == null){
+        // console.log('here1111 0: ' + val)
+       this.ipA = 'localhost/nibras'
+       } else
+    
+      // this.ipA = 'localhost/nibras'
+   this.ipA = val;
+
+   
+  //  this.ipA = 'localhost/nibras'
+  //  this.storage.set('ipA', 'localhost/nibras')
+   
+
+ 
+     
+   // this.syncAll();
+    }).catch(()=>{
+      console.log('===================here1111 0: error catch' )
+      this.ipA = 'localhost/nibras'
+      this.storage.set('ipA', 'localhost/nibras')
+    });
+
     var link = "https://" + this.ipA + "/page/heartbeatJson"
 
     this.http.get(link,{}).subscribe(response => {                
@@ -65,16 +84,11 @@ export class HomePage {
       //console.log ('res' + response['result'])
     },
     err => {               
-  //  document.getElementById('logArea').innerHTML =   'Nibras Desktop offline';
-
-    
+    document.getElementById('logArea').innerHTML =   'Nibras Desktop offline';
+  // this.ipA = 'localhost/nibras'
+  
 
     })
-
- 
-     
-   // this.syncAll();
-    });
 
     this.storage.get('tosync').then((val) => {
       if (val){
@@ -170,7 +184,7 @@ change()
  else console.log('cancelled');    
  // todo : if cancelled, null taken!!
 }
-
+/*
 changeF() 
 {
  let v = prompt("Nibras Files IP", this.ipF)
@@ -181,6 +195,8 @@ changeF()
  else console.log('cancelled');    
  // todo : if cancelled, null taken!!
 }
+
+*/
 
 
 savek(){
@@ -294,7 +310,16 @@ syncData()
  this.syncDone()
 
     this.storage.get('ipA').then(val => {
-    this.ipA = val    
+
+      if (!val || val == 'null' || val == null){
+        // console.log('here1111 0: ' + val)
+       this.ipA = 'localhost/nibras'
+       } else
+    
+      // this.ipA = 'localhost/nibras'
+   this.ipA = val;
+
+   // this.ipA = val    
          var link = "https://" + this.ipA + "/page/heartbeatJson"
   
       this.http.get(link,{}).subscribe(response => {                
