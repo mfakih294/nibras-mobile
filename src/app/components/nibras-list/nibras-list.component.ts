@@ -7,6 +7,8 @@ import { Storage } from '@ionic/storage';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 
+import { ModalController } from '@ionic/angular';
+import { ExampleModalPage } from '../../example-modal/example-modal.page'
 
 
 @Component({
@@ -19,23 +21,100 @@ export class NibrasListComponent implements OnInit {
   @Input() items: [];
 @Input() expanded: boolean;
 tosyncText: String;
+dataReturned:any;
+//t: String;
 
   constructor(private storage: Storage, private file: File,
     private clipboard: Clipboard,
     private fileOpener: FileOpener,
+    public modalController: ModalController,
     private iab: InAppBrowser) { 
 this.expanded = false
 
-this.storage.get('tosync').then((val) => {
-  this.tosyncText = val
-  
-   });  
+this.storage.get('tosyncText').then((val) => {
+  this.tosyncText = val  
+   }).catch(()=>{
+    
+    this.tosyncText = ''
+    this.storage.set('tosyncText', '')
+  });
 
   }
 
-  copyText(item){
-    this.clipboard.copy(item.title + ' :: ' + item.body.replace(/<br\/>/g, '\n'));
-    document.getElementById(item.type + '' + item.id + 'copy').innerHTML = '<b>Copied</b>'
+
+  //item.ecode, item.rtype, item.id, item.title, item.body, item.files
+  async openModal(ecode, rtype, id, title, contents, files) {
+/*
+    var path 
+    if (ecode == 'R')
+    path = 'Nibras/' + ecode + '/' + rtype + '/' + Math.floor(id/100).toString() + '/' + id + '/' + name;
+    else path = 'Nibras/' + ecode + '/' + id + '/' + name;
+   
+    this.t = path + '.123\n' 
+  
+    this.file.listDir(this.file.externalRootDirectory, '/' +  path ).then((result) => {
+         // result will have an array of file objects with 
+         //file details or if its a directory
+              
+         //document.getElementById(item.type + '' + item.id + 'files1').innerHTML = 'obj ' + result.entries.length//toString()
+         for (let file of result) {
+        
+          // if (file.isDirectory == true) {
+           // t.push("-- " + file.name + '');
+            // Code if its a folder
+            
+          // } else 
+           if (file.isFile == true) {
+             // Code if its a file
+            //  console.log("This is a file"); (click)="openRFile(item.type, item.rtype, item.id, file)
+             let name = file.name // File name
+             this.t+= name + '\n'// "<span (click)='openRFile(" + item.type + ', ' + item.rtype + ',' + item.id + ',' + name + ")'> " + 
+                           //name + type + item.id + '</span><br/> <b> bold </b>';
+     
+           }
+         }
+
+
+         /////
+
+         
+    
+          
+      }).catch(
+        (err) => {
+      
+        this.t = '111111111111111.111'// + err.toString()
+        }
+        );
+        
+   */    
+    const modal = await this.modalController.create({
+      component: ExampleModalPage,
+      componentProps: {
+        "ecode": ecode,
+        "rtype": rtype,
+        "id": id,
+        "title": title,
+        "contents": contents,
+        "files": files
+      }
+    });
+ 
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned !== null) {
+        this.dataReturned = dataReturned.data;
+        //alert('Modal Sent Data :'+ dataReturned);
+      }
+    });
+ 
+    return await modal.present();
+  }
+
+
+
+  copyText(title, body){
+    this.clipboard.copy(title + ' :: ' + body.replace(/<br\/>/g, '\n'));
+    document.getElementById('copyLog').innerHTML = '<b>Copied</b>'
   }
 
 clean(text){
@@ -72,17 +151,22 @@ close(item)
 
  markDone(item) 
 {
-  document.getElementById(item.type + '' + item.id).innerHTML = ''
-  this.storage.get('tosync').then((val) => {
-    this.storage.set('tosync', val + ','  + item.ecode + '' + item.id  );
-    console.log('add to sync: ' , item.ecode + '' + item.id + '');    
-     });     
-     document.getElementById(item.type + '' + item.id + 'title').classList.add('done');
+  // document.getElementById(item.type + '' + item.id).innerHTML = ''
+  this.storage.get('tosyncText').then((val) => {
+    this.storage.set('tosyncText', val + ','  + item.ecode + '' + item.id  );
+    // console.log('add to sync: ' , item.ecode + '' + item.id + '');    
+     }).catch(()=>{
+    
+      this.storage.set('tosyncText', ','  + item.ecode + '' + item.id )
+    })
+  //  this.storage.set('tosyncText', ','  + item.ecode + '' + item.id );
+  //  this.tosyncText = item.ecode + '' + item.id 
+    //  document.getElementById(item.type + '' + item.id + 'title').classList.add('done');
      
-     document.getElementById(item.type + '' + item.id + 'preview').classList.add('done');
+    //  document.getElementById(item.type + '' + item.id + 'preview').classList.add('done');
 
-     document.getElementById(item.type + '' + item.id + 'preview').classList.add('justDone');
-     document.getElementById(item.type + '' + item.id + 'title').classList.add('justDone');
+    //  document.getElementById(item.type + '' + item.id + 'preview').classList.add('justDone');
+    //  document.getElementById(item.type + '' + item.id + 'title').classList.add('justDone');
      
 }
 

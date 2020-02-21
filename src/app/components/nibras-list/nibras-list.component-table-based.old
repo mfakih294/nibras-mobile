@@ -1,0 +1,98 @@
+
+    <!-- 
+  
+
+    <tr style="padding: 2px; border-top: 1px dash darkgray">
+
+        <td colspan="3" id="{{item.type + '' + item.id + 'title'}}" colspan="4" style="cursor: pointer; font-weight: bold; border-right: 0px;  border-left: 0px; border-top: 1px lightgray !important; padding: 4px; background:rgb(245, 243, 243); font-size: normall;"
+            class="{{item.language}} {{tosyncText.includes(',' + item.type + '' + item.id) ? 'done ' : ''}}"
+             (click)="openNext(item)">
+            <hr />
+            <span class="{{item.type}}" style="color: white;">
+        
+      </span> {{item.title}}
+            <br/>
+
+        </td>
+    </tr>
+
+    <tr style="padding: 1px">
+        <td colspan="3" style="cursor: pointer; font-size: small;">
+            <span style="text-align: right; font-size: small; padding-left :3px; padding-right: 3px;">
+            <i>{{item.meta}}</i>
+            </span>
+        </td>
+    </tr>
+
+    <tr class="metaRow hidden" id="{{item.type + '' + item.id}}actionsRow">
+        <td style="width: 12%">
+            <input type="checkbox" id="{{item.type + '' + item.id + 'checkbox'}}" (change)="markDone(item)" />
+             &nbsp;
+        </td>
+        <td></td>
+        <td style=" border-left: 0px;  border-right: 0px;  border-bottom: 0px; border-top: 1px lightgray !important; margin: 4px;text-align: left; font-weight: bold; font-size: small;">
+            {{item.id}} &nbsp;
+         
+            <span id="{{item.type + '' + item.id + 'copy'}}">
+      </span> &nbsp;
+            <span (click)="showFiles(item)">
+        &nbsp; {{item.nbFiles}} files </span>
+            <!-- <span (click)="listFilenames(item)">{{item.nbFiles}} files </span> -->
+            &nbsp;
+        </td>
+    </tr>
+    <!-- {{listFilenames(item)}}\ -->
+    <tr *ngIf="item.type == 'R' && item.files" id="{{item.type + '' + item.id}}filesTr" class="hidden">
+        <td colspan="3" id="{{item.type + '' + item.id}}files" style="column-count:2; font-size: small;">
+            <ul *ngFor="let file of item.files.split('\n')">
+                <li (click)="openRFile(item.ecode, item.rtype, item.id, file)">
+                    <!-- =={{item.ecode + '-' + item.rtype + '-' + item.id}}==  -->
+                    {{file}}
+                </li>
+            </ul>
+        </td>
+    </tr>
+
+    <tr *ngIf="item.type == 'E' && item.files" id="{{item.type + '' + item.id}}filesTr" class="hidden">
+        <td colspan="3" id="{{item.type + '' + item.id}}files" style="column-count: 2">
+            <ul *ngFor="let file of item.files.split('\n')">
+                <li (click)="openFile(item.type, item.id, file)">
+                    {{file}}
+                </li>
+            </ul>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="3" id="{{item.type + '' + item.id + 'preview'}}" colspan="4" style="background: white; font-size: small; word-wrap: break-word; border-left: 0px; border-right: 0px; border-top: 0px; border-bottom: 1px rgb(253, 226, 226) !important; padding: 0.7em; 
+  padding-right: 1em; cursor: pointer; overflow: hidden; overflow-wrap: anywhere; max-width: 99% !important;" class="{{item.language}} {{tosyncText.includes(',' + item.type + '' + item.id) ? 'done ' : ''}} hidden" (click)="openNext(item)">
+            {{clean(item.body)}}
+        </td>
+    </tr>
+    <tr>
+        <td id="{{item.type + '' + item.id}}fullText" colspan="3" style=" word-wrap: break-word; border-left: 0px; border-right: 0px; border-top: 0px; border-bottom: 1px rgb(253, 226, 226) !important; padding: 0.7em; 
+  padding-right: 1em; cursor: zoom-out; overflow: hidden; overflow-wrap: anywhere; max-width: 99% !important;" class="{{item.language}}">
+        </td>
+    </tr>
+    <tr id="{{item.type + '' + item.id}}closeRow" class="hidden">
+        <td colspan="3" (click)="close(item); " style="height: 30px;">
+            Close
+        </td>
+    </tr>
+
+-->
+    <!-- <tr>  -->
+    <!-- <td colspan="4" style="column-count: 2"> -->
+    <!-- <div id="{{item.type + '' + item.id}}files1"> -->
+
+
+    <!-- <table *ngFor="let file of listFilenames(item)">
+        <tr>
+          <td>{{file}} </td>
+        </tr>
+      </table> -->
+
+
+    <!-- </div> -->
+    <!-- </td> -->
+    <!-- </tr> -->

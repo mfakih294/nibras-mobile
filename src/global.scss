@@ -27,3 +27,31 @@
 
 
 $app-direction: rtl !important; // RTL only apps;
+
+
+
+a{
+    cursor: pointer;
+  }
+  
+  a {
+    text-transform: none !important;
+    font-size: small !important;
+  }
+  
+  button {
+    text-transform: none !important;
+    font-size: small !important;
+  }
+  
+  
+  input button {
+    text-transform: none !important;
+    font-size: small !important;
+    padding: 1px !important;
+  }
+
+
+  .done {
+      color: black;
+  }

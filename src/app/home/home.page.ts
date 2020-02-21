@@ -10,6 +10,8 @@ import { AlertController } from '@ionic/angular';
 // import { PreviewAnyFile } from '@ionic-native/preview-any-file';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 //import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+// import { version } from '../../../package.json';
+
 
 @Component({
   selector: 'app-home',
@@ -23,8 +25,9 @@ export class HomePage {
 
   nk;
   nklog = '';
-
-  tosync;
+  isOffline = true;
+  tosyncText;
+  // public version: string = version;
 
   //PreviewAnyFile: any;
 
@@ -66,7 +69,8 @@ export class HomePage {
   //  this.ipA = 'localhost/nibras'
   //  this.storage.set('ipA', 'localhost/nibras')
    
-
+this.refresh();
+this.syncData();
  
      
    // this.syncAll();
@@ -80,25 +84,27 @@ export class HomePage {
 
     this.http.get(link,{}).subscribe(response => {                
       if (response['result'] == 'ok')
-      document.getElementById('logArea').innerHTML =   'Nibras Desktop online';    
+      document.getElementById('logArea').innerHTML =   'Nibras PKM is online';    
+      this.isOffline = false
       //console.log ('res' + response['result'])
     },
     err => {               
-    document.getElementById('logArea').innerHTML =   'Nibras Desktop offline';
+    document.getElementById('logArea').innerHTML =   'Nibras PKM is offline';
+    this.syncData();
   // this.ipA = 'localhost/nibras'
   
 
     })
 
-    this.storage.get('tosync').then((val) => {
+    this.storage.get('tosyncText').then((val) => {
       if (val){
-        this.tosync = val  
+        this.tosyncText = val  
       } else {
-        this.storage.set('tosync', '')
+        this.storage.set('tosyncText', '')
       }
       });
 
-      this.syncData()
+   //   this.syncData()
   
 } // end of constructor
 
@@ -116,10 +122,12 @@ refresh(){
     this.http.get(link,{}).subscribe(response => {                
       if (response['result'] == 'ok')
       document.getElementById('logArea').innerHTML =   'Nibras Desktop online';    
+      this.isOffline = false
       //console.log ('res' + response['result'])
     },
     err => {               
      document.getElementById('logArea').innerHTML =   'Nibras Desktop offline'//  + err.message;
+     this.isOffline = true
     })
   })
 
@@ -154,8 +162,8 @@ async clearSync(){
         text: 'Ok',
         handler: () => {
 
-          this.storage.set('tosync', '')
-  this.tosync = ''
+          this.storage.set('tosyncText', '')
+  this.tosyncText = ''
   this.storage.set('nklog', '')
   this.nklog = ''
   document.getElementById('logArea').innerHTML  = 'All cleared.';
@@ -176,12 +184,13 @@ async clearSync(){
 }
 change() 
 {
- let v = prompt("Nibras IP", this.ipA)
+  // <br /><i style="font-size: small">Format: .
+ let v = prompt("Nibras PKM IP (<code>IP(:port)/app-name</code>, e.g.: 192.168.1.23/nibras)", this.ipA)
  if (v){
  this.ipA = v
  this.storage.set('ipA', this.ipA);
  }
- else console.log('cancelled');    
+ else console.log('Cancelled');    
  // todo : if cancelled, null taken!!
 }
 /*
@@ -214,7 +223,7 @@ savek(){
       current_datetime.getDate() + "." + (current_datetime.getMonth() + 1) + "." + 
       current_datetime.getFullYear() + ' ' + 
       current_datetime.getHours() + ":" + current_datetime.getMinutes() +
-      ' :: '  + this.nk + '<br/>'    
+      ' :: '  + this.nk + '\n'    
     + val 
     this.storage.set('nklog', this.nklog)
     //document.getElementById('nklog').innerHTML =  this.nklog;
@@ -231,9 +240,9 @@ savek(){
 syncDone(){
   this.storage.get('ipA').then(val => {
     this.ipA = val       
-   this.storage.get('tosync').then((val) => {
+   this.storage.get('tosyncText').then((val) => {
    const params = new HttpParams()
-   .set('tosync', val); 
+   .set('tosyncText', val); 
    const httpOptions = {
      headers: new Headers({
        'Content-Type':  'application/json'
@@ -242,8 +251,8 @@ syncDone(){
      var ipp = this.ipA
      var link = "https://" + ipp + "/sync/mobilePush"
      this.http.get(link,{params: params}).subscribe(response => {          
-     document.getElementById('logArea').innerHTML = response + ' synced.'     
-     this.storage.set('tosync', '')
+    // document.getElementById('logArea').innerHTML = response + ' synced.'     
+     this.storage.set('tosyncText', '')
      //this.syncData();
      },
      err => {    
@@ -302,6 +311,9 @@ syncWritings()
 
  
  }
+
+
+
 syncData() 
  {
 
@@ -385,6 +397,7 @@ syncData()
   } // end of sync
 
   syncType(type, label){
+
     this.http.get("https://" + this.ipA + "/sync/exportJson" + type).subscribe(response => {     
   let t = type;
 this.storage.set('mytext' + t, response['data']);
@@ -415,18 +428,20 @@ document.getElementById('menuItem' + t).innerHTML =   label + ' (' +  response['
     )
   
   }
-
-
-}, error =>{
-  let t = type;
-  this.storage.get('mytext' + t).then((val) => {
-    if (val){
-    document.getElementById('menuItem' + t).innerHTML =   label + ' (' +  val.length + ')'
-     };
+}, err => {
+//  let t = type;
+  
+  this.storage.get('mytext' + type).then((val) => {
+    // if (val.length > 0){
+    document.getElementById('menuItem' + type).innerHTML =   label + ' (' +  val.length + ')'
+    //  };
     });
 
 });
+
+
   }
+
   update() 
   {
    this.storage.set('ipA', this.ipA);

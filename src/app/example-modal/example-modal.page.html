@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar style="direction: rtl; text-align: right">
+    <ion-title style="direction: rtl; text-align: right; word-wrap: break-word !important; overflow-wrap: break-word;">
+      {{title}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card direction="rtl">
+    <ion-card-header>
+      <ion-card-subtitle style="direction: rtl; text-align: right">
+        <ion-button (click)="closeModal()">Close</ion-button>
+        <ion-button (click)="copyText(title, contents)">Copy</ion-button>
+        <!-- <input type="checkbox" id="{{type + '' + id + 'checkbox'}}" (change)="markDone(type, id)" /> -->
+        <span id="copyLog">
+        </span>
+      </ion-card-subtitle>
+      <!-- <ion-card-title style="direction: rtl; text-align: right; word-wrap: break-word !important; overflow-wrap: break-word;">
+      
+      {{title}}
+      </ion-card-title> -->
+
+    </ion-card-header>
+
+    <ion-card-content style="direction: rtl; text-align: justify;">
+
+      <div *ngIf="files">
+        <div style="column-count:1;   column-rule-style: solid; font-size: small;">
+          <span *ngFor="let file of files.split('\n')"
+            style=" padding: 2px; margin: 3px; display: block">
+            <!-- =={{item.ecode + '-' + item.rtype + '-' + item.id}}==  -->
+            <ion-button  (click)="openRFile(ecode, rtype, id, file)" class="ion-outline"
+             outline 
+             style="display: inline-block;">
+            {{file?.split('.')[0]}}
+            </ion-button>
+            
+
+          </span>
+
+        </div>
+      </div>
+
+      <div [innerHTML]="contents"></div>
+
+      <!-- <form (ngSubmit)="savek()">
+            
+    <ion-input name="nkinput"  autofocus="true" color="light" rows="3" 
+     style="display: inline-block; direction: rtl; text-align: right;
+      border: 1px lightgrey; background: lightblue"  [(ngModel)]="nk"
+    placeholder="Enter note..."  type="text" id="nkinput"></ion-input>  
+    
+  </form>
+ 
+  <div id="nklog" style='overflow: auto; direction: rtl; text-align: right; '>
+</div>  -->
+
+      <span id="{{ecode + id + 'log'}}"></span>
+
+
+
+    </ion-card-content>
+  </ion-card>
+
+
+</ion-content>

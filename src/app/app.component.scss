@@ -1,7 +1,18 @@
-
-a{
-    cursor: pointer;
+* {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
 }
+
+.done {
+    color: black;
+}
+
+input {
+    padding: 1px !important;
+}
+  
 
 .ar{
 text-align: justify !important;

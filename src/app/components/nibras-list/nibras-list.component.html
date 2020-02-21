@@ -1,96 +1,53 @@
-<table *ngFor="let item of items" style="padding: 2px; width: 99%; max-width: 99% !important; word-wrap: break-word !important; overflow-wrap: break-word">
-    <tr style="padding: 2px; border-top: 1px dash darkgray">
+<!-- <ion-button >Open Modal</ion-button> -->
+<div *ngFor="let item of items"
+    style="padding: 2px; width: 99%; max-width: 99% !important; word-wrap: break-word !important; overflow-wrap: break-word">
+    <!-- <tr>
+    <td colspan="3">tr> -->
+    <!-- <td colspan="3"> -->
+    <ion-card style="direction: rtl; text-align: right" button="true">
+        <ion-card-header >
+            <ion-card-subtitle style="direction: ltr; text-align: left; font-size: smaller;">
+                <ion-checkbox id="{{item.ecode + '' + item.id + 'checkbox'}}"                                
+                checked="{{tosyncText ? (tosyncText.includes(',' + item.ecode + '' + item.id) ? true : false): false}}"                
+                 (ionChange)="markDone(item)" ></ion-checkbox>
+                &nbsp;
+                &nbsp;
+                <span class="{{item.type}}" style="padding: 3px; color: white;">
+                <b>{{item.type}}</b> 
+                </span>                
+                {{item.id}} &nbsp; <i>{{item.meta}}</i>
+            </ion-card-subtitle>
+            <ion-card-title class="{{item.language}}"
+             style="font-size: large;">
+                {{item.title}}
+            </ion-card-title>
 
-        <td colspan="3" id="{{item.type + '' + item.id + 'title'}}" colspan="4" style="cursor: pointer; font-weight: bold; border-right: 0px;  border-left: 0px; border-top: 1px lightgray !important; padding: 4px; background:rgb(245, 243, 243); font-size: normall;"
-            class="{{item.language}} {{tosyncText.includes(',' + item.type + '' + item.id) ? 'done ' : ''}}" (click)="openNext(item)">
-            <hr />
-            <span class="{{item.type}}" style="color: white;">
-        <b>{{item.type}}</b>
-      </span> {{item.title}}
-            <br/>
+        </ion-card-header>
 
-        </td>
-    </tr>
+        <ion-card-content class="{{item.language}} {{tosyncText ? (tosyncText.includes(',' + item.ecode + '' + item.id) ? 'done2' : ''): ''}}"
+            (click)="openModal(item.ecode, item.rtype, item.id, item.title, item.body, item.files)" style="padding: 3px; margin: 3px;">            
+                {{clean(item.body)}}
+            <br />
+            <div class="ion-text-center" dir="ltr" style="padding: 3px;">
+                <i>{{item.nbFiles ? item.nbFiles + ' files' : ''}} </i>
+            </div>
 
-    <tr style="padding: 1px">
-        <td colspan="3" style="cursor: pointer; font-size: small;">
-            <span style="text-align: right; font-size: small; padding-left :3px; padding-right: 3px;">
-            <i>{{item.meta}}</i>
-            </span>
-        </td>
-    </tr>
-
-    <tr class="metaRow hidden" id="{{item.type + '' + item.id}}actionsRow">
-        <td style="width: 12%">
-            <input type="checkbox" id="{{item.type + '' + item.id + 'checkbox'}}" (change)="markDone(item)" /> &nbsp;
-        </td>
-        <td></td>
-        <td style=" border-left: 0px;  border-right: 0px;  border-bottom: 0px; border-top: 1px lightgray !important; margin: 4px;text-align: left; font-weight: bold; font-size: small;">
-            {{item.id}} &nbsp;
-            <span (click)="copyText(item)">
-        Copy
-      </span>
-            <span id="{{item.type + '' + item.id + 'copy'}}">
-      </span> &nbsp;
-            <span (click)="showFiles(item)">
-        &nbsp; {{item.nbFiles}} files </span>
-            <!-- <span (click)="listFilenames(item)">{{item.nbFiles}} files </span> -->
-            &nbsp;
-        </td>
-    </tr>
-    <!-- {{listFilenames(item)}}\ -->
-    <tr *ngIf="item.type == 'R' && item.files" id="{{item.type + '' + item.id}}filesTr" class="hidden">
-        <td colspan="3" id="{{item.type + '' + item.id}}files" style="column-count:2; font-size: small;">
-            <ul *ngFor="let file of item.files.split('\n')">
-                <li (click)="openRFile(item.ecode, item.rtype, item.id, file)">
-                    <!-- =={{item.ecode + '-' + item.rtype + '-' + item.id}}==  -->
-                    {{file}}
-                </li>
-            </ul>
-        </td>
-    </tr>
-
-    <tr *ngIf="item.type == 'E' && item.files" id="{{item.type + '' + item.id}}filesTr" class="hidden">
-        <td colspan="3" id="{{item.type + '' + item.id}}files" style="column-count: 2">
-            <ul *ngFor="let file of item.files.split('\n')">
-                <li (click)="openFile(item.type, item.id, file)">
-                    {{file}}
-                </li>
-            </ul>
-        </td>
-    </tr>
-
-    <tr>
-        <td colspan="3" id="{{item.type + '' + item.id + 'preview'}}" colspan="4" style="background: white; font-size: small; word-wrap: break-word; border-left: 0px; border-right: 0px; border-top: 0px; border-bottom: 1px rgb(253, 226, 226) !important; padding: 0.7em; 
-  padding-right: 1em; cursor: pointer; overflow: hidden; overflow-wrap: anywhere; max-width: 99% !important;" class="{{item.language}} {{tosyncText.includes(',' + item.type + '' + item.id) ? 'done ' : ''}} hidden" (click)="openNext(item)">
-            {{clean(item.body)}}
-        </td>
-    </tr>
-    <tr>
-        <td id="{{item.type + '' + item.id}}fullText" colspan="3" style=" word-wrap: break-word; border-left: 0px; border-right: 0px; border-top: 0px; border-bottom: 1px rgb(253, 226, 226) !important; padding: 0.7em; 
-  padding-right: 1em; cursor: zoom-out; overflow: hidden; overflow-wrap: anywhere; max-width: 99% !important;" class="{{item.language}}">
-        </td>
-    </tr>
-    <tr id="{{item.type + '' + item.id}}closeRow" class="hidden">
-        <td colspan="3" (click)="close(item); " style="height: 30px;">
-            Close
-        </td>
-    </tr>
-
-    <!-- <tr>  -->
-    <!-- <td colspan="4" style="column-count: 2"> -->
-    <!-- <div id="{{item.type + '' + item.id}}files1"> -->
+            <!-- <div *ngIf="item.type == 'R' && item.files" id="{{item.type + '' + item.id}}filesTr"
+            style="column-count:3; column-gap: 5px;  column-rule-style: solid; font-size: small;">
+                
+                    <span *ngFor="let file of item.files.split('\n')"
+                        (click)="openRFile(item.ecode, item.rtype, item.id, file)" 
+                        style="border: gainsboro solid; padding: 2px; margin: 3px; display: inline-block">
+                            =={{item.ecode + '-' + item.rtype + '-' + item.id}}==
+                          {{file?.split('.')[0]}}
+                       
+                    </span>
+               
+            </div> -->
 
 
-    <!-- <table *ngFor="let file of listFilenames(item)">
-        <tr>
-          <td>{{file}} </td>
-        </tr>
-      </table> -->
 
+        </ion-card-content>
+    </ion-card>
 
-    <!-- </div> -->
-    <!-- </td> -->
-    <!-- </tr> -->
-
-</table>
+</div>

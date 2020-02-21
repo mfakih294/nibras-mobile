@@ -26,6 +26,7 @@ import { ComponentsModule } from './components/components.module';
 import { Autostart } from '@ionic-native/autostart/ngx';
 //import { NtableComponent } from './ntable/ntable.component';
 //import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { ExampleModalPageModule } from './example-modal/example-modal.module';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { Autostart } from '@ionic-native/autostart/ngx';
   ComponentsModule,
   IonicModule.forRoot(), 
       IonicStorageModule.forRoot(),
-  AppRoutingModule
+  AppRoutingModule,
+  ExampleModalPageModule
 ], 
   providers: [
     StatusBar,
