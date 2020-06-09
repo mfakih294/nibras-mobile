@@ -166,7 +166,7 @@ async clearSync(){
   this.tosyncText = ''
   this.storage.set('nklog', '')
   this.nklog = ''
-  document.getElementById('logArea').innerHTML  = 'All cleared.';
+  document.getElementById('logAreaNotes').innerHTML  = 'All has been cleared.';
 
 
           console.log('Confirm Okay');
@@ -297,13 +297,13 @@ syncWritings()
       var link = "https://" + ipp + "/sync/mobileWritings"
    
       this.http.post(link, postData, httpOptions).subscribe(response => {          
-      document.getElementById('logArea').innerHTML = response['result']
+      document.getElementById('logAreaNotes').innerHTML = response['result']
     //  this.storage.set('nklog', '')
     //  this.nklog = ''
     //  this.syncData();
       },
       err => {    
-       document.getElementById('logArea').innerHTML = 'Not synced'// + err.message
+       document.getElementById('logAreaNotes').innerHTML = 'Not synced'// + err.message
       })
     });
    });
