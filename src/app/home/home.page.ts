@@ -20,7 +20,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 })
 export class HomePage {
 
-  ipA = 'localhost/nibras';
+  ipA = '192.168.0.11:1441/nibras';
   //ipF;
 
   nk;
@@ -59,7 +59,7 @@ export class HomePage {
       // console.log('ipa 0: ' + val)
        if (!val || val == 'null' || val == null){
         // console.log('here1111 0: ' + val)
-       this.ipA = 'localhost/nibras'
+       this.ipA = '192.168.0.11:1441/nibras'
        } else
     
       // this.ipA = 'localhost/nibras'
@@ -76,8 +76,8 @@ this.syncData();
    // this.syncAll();
     }).catch(()=>{
       console.log('===================here1111 0: error catch' )
-      this.ipA = 'localhost/nibras'
-      this.storage.set('ipA', 'localhost/nibras')
+      this.ipA = '192.168.0.11:1441/nibras'
+      this.storage.set('ipA', '192.168.0.11:1441/nibras')
     });
 
     var link = "https://" + this.ipA + "/page/heartbeatJson"
@@ -91,7 +91,7 @@ this.syncData();
     err => {               
     document.getElementById('logArea').innerHTML =   'Nibras PKM is offline';
     this.syncData();
-  // this.ipA = 'localhost/nibras'
+  // this.ipA = '192.168.0.11:1441/nibras'
   
 
     })
@@ -325,10 +325,10 @@ syncData()
 
       if (!val || val == 'null' || val == null){
         // console.log('here1111 0: ' + val)
-       this.ipA = 'localhost/nibras'
+       this.ipA = '192.168.0.11:1441/nibras'
        } else
     
-      // this.ipA = 'localhost/nibras'
+      // this.ipA = '192.168.0.11:1441/nibras'
    this.ipA = val;
 
    // this.ipA = val    
