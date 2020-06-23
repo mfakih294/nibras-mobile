@@ -8,6 +8,6 @@
 * To use Nibras Mobile, the user has to specify first the IP and port of Nibras Desktop. Then, when clicking 'Sync', all bookmarked records will be available for reading on mobile.
 
 * To get it, download and install the .apk release found on its website: 
-https://github.com/mfakih294/nibras-mobile.
+[https://github.com/mfakih294/Nibras-Reader](https://github.com/mfakih294/Nibras-Reader).
 
-![Screenshots](http://khuta.org/nibras-doc/images/nibras-mobile-homepage.jpg)
+![Screenshots](https://raw.githubusercontent.com/mfakih294/Nibras-Reader/master/docs/screenshot.jpeg)

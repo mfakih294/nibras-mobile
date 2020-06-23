@@ -24,6 +24,8 @@ export class HomePage {
   //ipF;
 
   nk;
+  ipTemp;
+  
   nklog = '';
   isOffline = true;
   tosyncText;
@@ -206,6 +208,20 @@ changeF()
 }
 
 */
+
+
+saveIp2(){
+  
+    this.storage.set('ipA', this.ipTemp);
+    this.ipA = this.ipTemp;
+    document.getElementById('logArea').innerHTML  = 'Nibras PKM IP has been updated to ' + this.ipTemp;
+    //document.getElementById('nklog').innerHTML =  this.nklog;
+    //document.getElementById('nk').nodeValue('')
+    
+  
+  
+}
+
 
 
 savek(){
