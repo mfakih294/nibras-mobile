@@ -4,7 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Nibras Reader v1.2.2
+      Nibras Reader v1.2.7
       <!-- {{version}} -->
     </ion-title>
   </ion-toolbar>
@@ -17,9 +17,24 @@
 
       <ion-card-title>Connect
         <span style="font-style: italic; font-size: small; float: right; color: darkgray">
-          {{ipA}}
+          
         </span>
         <br/>
+
+        <form (ngSubmit)="saveIp2()">
+
+          <ion-input name="nkinput" autofocus="true" 
+          color="black" 
+          style="font-size: small; display: inline-block; direction: ltr; text-align: left; padding: 1px;
+                border: 1px solid darkgrey; background: ghostwhite" placeholder="IP of Nibras PKM..." 
+                type="text" value="{{ipA}}"
+                [(ngModel)]="ipTemp"
+            ></ion-input>
+          <!-- <a  style="display: inline; font-size: small; padding: 0px; margin: 0px;" (click) = "savek();" onclick="document.getElementById('nkinput').focus()">+++++++++++++++++++++++++++++++</a> -->
+        </form>
+
+
+
         <div id='logArea' style="font-style: italic; font-size: small; float: right; color: darkgray"></div>
 
       </ion-card-title>
