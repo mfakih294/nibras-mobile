@@ -28,7 +28,46 @@
 
 $app-direction: rtl !important; // RTL only apps;
 
+/*
 
+We recommend passing a custom class to cssClass in the create method
+ and using that to add custom styles to the host and inner elements.
+ This property can also accept multiple classes separated by spaces.
+ View the Usage section for an example of how to pass a class using cssClass. 
+ Any of the defined CSS Custom Properties can be used to style the Modal
+  without needing to target individual elements:
+  
+  https://ionicframework.com/docs/api/modal
+  
+  */
+
+
+.nbrModal .modal-wrapper {
+  font-size: 1.1em;
+  line-height: 30px;
+}
+
+.nbrModal {
+  font-size: 1em;
+  line-height: 2;
+}
+
+.nbrModal * {
+  font-size: 1em;
+  line-height: 2;
+}
+
+
+.sc-ion-label-md-h {
+  font-size: small !important;
+  
+  padding-left: 3px;
+}
+.split-pane-side{ 
+  min-width: 22% !important;
+  max-width: 22% !important;
+
+}
 
 a{
     cursor: pointer;
@@ -36,7 +75,7 @@ a{
   
   a {
     text-transform: none !important;
-    font-size: small !important;
+    font-size: normal !important;
   }
   
   button {
@@ -55,3 +94,7 @@ a{
   .done {
       color: black;
   }
+
+
+  
+ 

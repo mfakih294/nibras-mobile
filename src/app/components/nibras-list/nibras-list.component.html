@@ -25,7 +25,7 @@
         </ion-card-header>
 
         <ion-card-content class="{{item.language}} {{tosyncText ? (tosyncText.includes(',' + item.ecode + '' + item.id) ? 'done2' : ''): ''}}"
-            (click)="openModal(item.ecode, item.rtype, item.id, item.title, item.body, item.files)" style="padding: 3px; margin: 3px;">            
+            (click)="openModal(item.ecode, item.rtype, item.id, item.title, item.body, item.files)" style="padding: 3px; margin: 3px; font-size: 1em;">            
                 {{clean(item.body)}}
             <br />
             <div class="ion-text-center" dir="ltr" style="padding: 3px;">

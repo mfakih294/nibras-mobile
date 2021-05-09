@@ -3,6 +3,10 @@
     <ion-title style="direction: rtl; text-align: right; word-wrap: break-word !important; overflow-wrap: break-word;">
       {{title}}
     </ion-title>
+
+    <ion-button outline style="text-transform: none;" (click)="closeModal()">Close</ion-button>
+    <ion-button outline style="text-transform: none;" (click)="copyText(title, contents)">Copy</ion-button>
+    
   </ion-toolbar>
 </ion-header>
 
@@ -11,8 +15,6 @@
   <ion-card direction="rtl">
     <ion-card-header>
       <ion-card-subtitle style="direction: rtl; text-align: right">
-        <ion-button (click)="closeModal()">Close</ion-button>
-        <ion-button (click)="copyText(title, contents)">Copy</ion-button>
         <!-- <input type="checkbox" id="{{type + '' + id + 'checkbox'}}" (change)="markDone(type, id)" /> -->
         <span id="copyLog">
         </span>
@@ -44,6 +46,8 @@
       </div>
 
       <div [innerHTML]="contents"></div>
+
+      
 
       <!-- <form (ngSubmit)="savek()">
             

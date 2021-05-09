@@ -17,7 +17,7 @@ ipL
 message = ''
   constructor(private http: HttpClient, private storage: Storage){
 
-    this.storage.get('mytextK').then((val) => {
+    this.storage.get('mytextJ').then((val) => {
       this.items = val;
     }); 
 } // end of constructor

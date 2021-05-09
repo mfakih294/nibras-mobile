@@ -89,10 +89,11 @@ this.storage.get('tosyncText').then((val) => {
         
    */    
     const modal = await this.modalController.create({
-      component: ExampleModalPage,
+      component: ExampleModalPage, cssClass: 'nbrModal',
       componentProps: {
         "ecode": ecode,
         "rtype": rtype,
+        
         "id": id,
         "title": title,
         "contents": contents,

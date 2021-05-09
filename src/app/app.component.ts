@@ -14,7 +14,7 @@ import { Autostart } from '@ionic-native/autostart/ngx';
 export class AppComponent {
   public appPages = [
     {
-      title: 'Home',
+      title: '',
       type: 'home',
       url: '/home',
       icon: 'home'
@@ -42,14 +42,20 @@ export class AppComponent {
       title: 'Plans',
       type: 'P',
       url: '/p',
-      icon: 'checkmark'
+      icon: 'alarm'
     },
-  
+    {
+      title: 'Journal',
+      type: 'J',
+      url: '/k',
+      icon: 'clock'
+    },
+ 
 	  {
       title: 'Goals',
       type: 'G',
       url: '/g',
-      icon: 'analytics'
+      icon: 'flag'
     },
 // {
 //       title: 'N piles',
@@ -63,7 +69,7 @@ export class AppComponent {
       title: 'Notes',
       type: 'N',
       url: '/n',
-      icon: 'create'
+      icon: 'card'
     },
 
 
@@ -71,20 +77,20 @@ export class AppComponent {
       title: 'Writings',
       type: 'W',
       url: '/w',
-      icon: 'create'
+      icon: 'clipboard'
     },
         {
       title: 'Excerpts',
       type: 'E',
       url: '/e',
-      icon: 'bookmarks'
+      icon: 'bookmark'
     },
 	 
 	{
       title: 'Resources',
       type: 'R',
       url: '/r',
-      icon: 'bookmarks'
+      icon: 'book'
     } ,
 	{
       title: 'Articles',
@@ -97,7 +103,7 @@ export class AppComponent {
       title: 'News',
       type: 'Nws',
       url: '/nws',
-      icon: 'bookmarks'
+      icon: 'logo-rss'
     } 
 	
   ];

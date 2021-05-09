@@ -229,17 +229,17 @@ savek(){
   this.storage.get('nklog').then(val => {
     if (!this.nk || this.nk == null || this.nk == '' || this.nk == ' '){
     document.getElementById('logArea').innerHTML = 'No text to append';
-    console.log('new:' + this.nk);
+   // console.log('new:' + this.nk);
     }
     else {
 
       
     let current_datetime = new Date()
-    this.nklog = 
+    this.nklog = 'a n p2 d- (' +
       current_datetime.getDate() + "." + (current_datetime.getMonth() + 1) + "." + 
-      current_datetime.getFullYear() + ' ' + 
-      current_datetime.getHours() + ":" + current_datetime.getMinutes() +
-      ' :: '  + this.nk + '\n'    
+      current_datetime.getFullYear() + '_' + 
+      current_datetime.getHours() + "" + current_datetime.getMinutes() +
+      ' -- :: '  + this.nk + '\n\n\n'    
     + val 
     this.storage.set('nklog', this.nklog)
     //document.getElementById('nklog').innerHTML =  this.nklog;
@@ -359,7 +359,8 @@ syncData()
         this.syncType('T', 'Tasks')
         // this.syncType('Cal', 'Calendar')
         this.syncType('P', 'Planner')
-        
+        this.syncType('J', 'Journal')
+
         this.syncType('G', 'Goals')
         // this.syncType('K', 'Nk piles')
          this.syncType('E', 'Excerpts')
@@ -383,7 +384,8 @@ syncData()
        this.syncType('T', 'Tasks')
    //    this.syncType('Cal', 'Calendar')
        this.syncType('P', 'Planner')
-       
+       this.syncType('J', 'Journal')
+
        this.syncType('G', 'Goals')
       //  this.syncType('K', 'Nk piles')
         this.syncType('E', 'Excerpts')
@@ -417,7 +419,8 @@ syncData()
     this.http.get("https://" + this.ipA + "/sync/exportJson" + type).subscribe(response => {     
   let t = type;
 this.storage.set('mytext' + t, response['data']);
-document.getElementById('menuItem' + t).innerHTML =   label + ' (' +  response['data'].length + ')'
+// document.getElementById('menuItem' + t).innerHTML =   label + ' (' +  response['data'].length + ')'
+document.getElementById('menuItem' + t).innerHTML =   ' ' +  response['data'].length + ''
 
   // Schedule delayed notification
   

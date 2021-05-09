@@ -4,3 +4,44 @@
 }
 
 
+.myMenu {
+  max-width: 30px !important;
+  width: 30px !important;
+  color: white;
+}
+
+.menu.menu-left{
+	width: calc(10% - 70px) !important;
+}
+.menu-open .menu-content{
+	transform: translate3d(calc(10% - 70px), 0px, 0px) !important;
+}
+
+ion-menu {
+  max-width: 10% !important;
+}
+
+.menu-content {
+  max-width: 90% !important;
+}
+
+.menu {
+  --side-width: 30px !important;
+  --side-max-width: 30px !important;
+  --max-width: 40px !important;
+  --width: 40px !important;
+  width: 40px !important;
+}
+
+ion-menu {
+  max-width: 10% !important;
+}
+
+.menu-content {
+  max-width: 90% !important;
+}
+
+
+.native-textarea .sc-ion-textarea-md {
+height: 100% !important;
+}

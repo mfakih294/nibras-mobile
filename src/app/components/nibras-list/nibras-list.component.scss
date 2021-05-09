@@ -1,5 +1,7 @@
 body {
     color: black;
+    font-size: 1.2em;
+    line-height: 30px;
 }
 
 .hidden {
@@ -20,6 +22,7 @@ body {
 .en {
     text-align: justify !important;
     direction: ltr !important;
+    font-size: 1em;
 }
 
 .done2 {
@@ -39,7 +42,7 @@ body {
 }
 
 table td {
-    font-size: normal;
+    font-size: 1.2em;
     line-height: 30px;
 }
 
@@ -49,7 +52,7 @@ table td {
     // background: rgb(253, 246, 227) !important;
     color: rgb(43, 52, 55) !important;
     ;
-    font-size: 0.94em;
+    font-size: 1em;
 }
 
 .Todo {

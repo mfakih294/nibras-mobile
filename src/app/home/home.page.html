@@ -4,13 +4,116 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Nibras Reader v1.2.7
+      Nibras Reader v1.3.1
       <!-- {{version}} -->
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  
+  <!-- <b>Nibras Files IP and port</b>: 
+          <a (click) = "changeF()">
+            {{ipF}} (edit)
+          </a>
+        -->
+
+  <!-- <a href="files/eg.jpg" target="_blank">eg.jpg</a> -->
+
+  <!-- <b></b>{{tosync?.split(',')?.length - 1}} records to  -->
+  <!-- <a  style="font-size: small; padding: 1px" (click) = "syncDone()">commit.</a> -->
+  <!--     <div style="border-bottom: 1px solid darkgray">
+          
+          <br/>
+          
+		  </div>
+          <br/>
+          <hr/>
+          <br/>  -->
+
+  <!-- <ion-card>
+    
+    <ion-card-header>
+
+      <ion-card-title>Sync
+
+        
+
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+
+    </ion-card-content>
+  </ion-card> -->
+
+
+  <!-- <div style="border-bottom: 1px solid darkgray"> -->
+
+  <ion-card>
+    <!--img src="/assets/shapes.svg" alt="" /-->
+    <ion-card-header>
+
+      <ion-card-title>Notes
+        <span
+          style="color: darkgray; float: right; font-size: small">{{nklog?.split('::')?.length - 1 == -1 ? '0' :  nklog?.split('::')?.length - 1}}
+          notes</span>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content [ngStyle]="{ 'white-space': 'pre-wrap' }">
+    
+  
+      <form (ngSubmit)="savek()">
+
+        <ion-textarea name="nkinput" autofocus="true" rows="5" autosize
+        color="black"  (ionBlur)="savek()" 
+        style="height: 130px; display: inline-block; direction: rtl; text-align: right; padding: 1px;
+              border: 1px solid darkgrey; background: ghostwhite" placeholder="Enter note..." 
+              type="text" id="nkinput"
+          [(ngModel)]="nk"></ion-textarea>
+
+        <!-- <a  style="display: inline; font-size: small; padding: 0px; margin: 0px;"  -->
+        <!-- (click) = "savek();" onclick="document.getElementById('nkinput').focus()">Add</a> -->
+
+        <ion-button outline style="text-transform: none; width: 99%;" size="small"
+        onclick="document.getElementById('nkinput').focus()"
+        (click)="savek()">Add</ion-button>        
+      </form>
+      <br />
+
+
+    
+
+
+      <!-- <div name="nklog" id="nklog" style='overflow: auto; line-height: 20px; direction: rtl; text-align: right; border: 1px solid darkgray'  -->
+      <!-- [innerHTML]="nklog"> -->
+      <!-- </div> -->
+
+      <div name="nklog" id="nklog" style='overflow: auto; line-height: 22px; direction: rtl; text-align: justified;'
+        *ngFor="let line of nklog.split('\n\n\n')">
+        <div style="direction: ltr; text-align: left; font-size: small; color: darkgray;; font-weight: bold;">{{line?.split('::')[0]}}
+        </div>
+        <div style="border-right: 1px lightgrey solid; padding: 2px; margin: 2px; line-height: 20px; text-align: justified; font-size: 1em;">
+          {{line?.split('::')[1]}}
+        </div>
+      </div>
+
+      <ion-button outline [disabled]="isOffline" id='saveAsNoteLink' style=" padding: 1px;text-transform: none;"
+      (click)="syncWritings()" size="small">
+      <!-- <ion-icon name="cloud-upload-outline"></ion-icon> -->
+      <!-- <ion-icon name="cloud-upload-outline"></ion-icon> -->
+      Copy notes
+    </ion-button>
+
+      <ion-button (click)="clearSync()" size="small" style="text-transform: none;"
+      before="if(!confirm('Are you sure you want to clear the entered notes?')) return false">Clear</ion-button>
+
+<div id='logAreaNotes' style="font-style: italic; font-size: small; float: right; color: darkgray"></div>
+
+
+
+    </ion-card-content>
+  </ion-card>
+
   <ion-card class="welcome-card">
     <!--img src="/assets/shapes.svg" alt="" /-->
     <ion-card-header>
@@ -69,97 +172,5 @@
     </ion-card-content>
   </ion-card>
 
-  <!-- <b>Nibras Files IP and port</b>: 
-          <a (click) = "changeF()">
-            {{ipF}} (edit)
-          </a>
-        -->
-
-  <!-- <a href="files/eg.jpg" target="_blank">eg.jpg</a> -->
-
-  <!-- <b></b>{{tosync?.split(',')?.length - 1}} records to  -->
-  <!-- <a  style="font-size: small; padding: 1px" (click) = "syncDone()">commit.</a> -->
-  <!--     <div style="border-bottom: 1px solid darkgray">
-          
-          <br/>
-          
-		  </div>
-          <br/>
-          <hr/>
-          <br/>  -->
-
-  <!-- <ion-card>
-    
-    <ion-card-header>
-
-      <ion-card-title>Sync
-
-        
-
-      </ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-
-    </ion-card-content>
-  </ion-card> -->
-
-
-  <!-- <div style="border-bottom: 1px solid darkgray"> -->
-
-  <ion-card>
-    <!--img src="/assets/shapes.svg" alt="" /-->
-    <ion-card-header>
-
-      <ion-card-title>Notes
-        <span
-          style="color: darkgray; float: right; font-size: small">{{nklog?.split('::')?.length - 1 == -1 ? '0' :  nklog?.split('::')?.length - 1}}
-          lines</span>
-      </ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-
-
-     
-
-   
-      <form (ngSubmit)="savek()">
-
-        <ion-input name="nkinput" autofocus="true" 
-        color="black" 
-        style="display: inline-block; direction: rtl; text-align: right; padding: 1px;
-              border: 1px solid darkgrey; background: ghostwhite" placeholder="Enter note..." 
-              type="text" id="nkinput"
-          [(ngModel)]="nk"></ion-input>
-        <!-- <a  style="display: inline; font-size: small; padding: 0px; margin: 0px;" (click) = "savek();" onclick="document.getElementById('nkinput').focus()">+++++++++++++++++++++++++++++++</a> -->
-      </form>
-      <br />
-
-      <!-- <div name="nklog" id="nklog" style='overflow: auto; line-height: 20px; direction: rtl; text-align: right; border: 1px solid darkgray'  -->
-      <!-- [innerHTML]="nklog"> -->
-      <!-- </div> -->
-
-      <div name="nklog" id="nklog" style='overflow: auto; line-height: 18px; direction: rtl; text-align: right;'
-        *ngFor="let line of nklog.split('\n')">
-        <div style="direction: ltr; text-align: left; font-size: smaller">{{line?.split('::')[0]}}
-        </div>
-        <div style="border: 1px lightgrey dashed; padding: 2px; margin: 2px;">
-          {{line?.split('::')[1]}}
-        </div>
-      </div>
-
-      <ion-button outline [disabled]="isOffline" id='saveAsNoteLink' style=" padding: 1px;text-transform: none;"
-      (click)="syncWritings()" size="small">
-      <!-- <ion-icon name="cloud-upload-outline"></ion-icon> -->
-      <!-- <ion-icon name="cloud-upload-outline"></ion-icon> -->
-      Copy notes
-    </ion-button>
-&nbsp;
-      <ion-button (click)="clearSync()" size="small" style="text-transform: none;"
-      before="if(!confirm('Are you sure you want to clear the entered notes?')) return false">Clear notes</ion-button>
-
-<div id='logAreaNotes' style="font-style: italic; font-size: small; float: right; color: darkgray"></div>
-
-    </ion-card-content>
-  </ion-card>
 
 </ion-content>
